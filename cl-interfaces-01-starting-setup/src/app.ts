@@ -1,24 +1,64 @@
 // Code goes here!
 class Department {
-  name: string;
+  // private readonly id: string;
+  // private name: string;
+  private employees: string[] = [];
 
-  constructor(departmentName: string) {
-    this.name = departmentName;
+  constructor(private readonly id: string, public name: string) {
+    // this.name = name;
+    // this.id = id;
   }
 
   describe(this: Department) {
-    console.log("Department: " + this.name);
+    console.log(`Department ${this.id}: ${this.name}`);
+  }
+
+  addEmployee(employee: string) {
+    this.employees.push(employee);
+  }
+
+  printEmployeeInformation() {
+    console.log(this.employees);
   }
 }
 
-const accountingDepartment = new Department("Accounting");
+class ItDepartment extends Department {
+  admins: string[];
+  constructor(id: string, admins: string[]) {
+    super(id, "IT");
+    this.admins = admins;
+  }
+}
+class AccountingDepartment extends Department {
+  constructor(id: string, private readonly reports: string[]) {
+    super(id, "Accounting");
+    this.reports = reports;
+  }
+
+  addReport(text: string) {
+    this.reports.push(text);
+  }
+
+  printReports() {
+    console.log(this.reports);
+  }
+}
+
+const itDepartment = new ItDepartment("d1", ["Max"]);
+const accountingDepartment = new AccountingDepartment("d1", [
+  "Balance reports",
+]);
 
 console.log(accountingDepartment.name);
+
 accountingDepartment.describe();
 
-const accountingCopy = {
-  name: "Fake accounting",
-  describe: accountingDepartment.describe,
-};
+accountingDepartment.addEmployee("Max");
+accountingDepartment.printEmployeeInformation();
 
-accountingCopy.describe();
+// const accountingCopy = {
+//   name: "Fake accounting",
+//   describe: accountingDepartment.describe,
+// };
+
+// accountingCopy.describe();
