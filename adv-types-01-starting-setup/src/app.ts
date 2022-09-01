@@ -70,12 +70,12 @@ useVehicle(new Car());
 useVehicle(new Truck());
 
 interface Bird {
-  type: 'bird';
+  type: "bird";
   flyingSpeed: number;
 }
 
 interface Horse {
-  type: 'horse';
+  type: "horse";
   runningSpeed: number;
 }
 
@@ -92,7 +92,11 @@ function moveAnimal(animal: Animal) {
       break;
   }
 
-  console.log('Animal is moving at speed of ' + speed)
+  console.log("Animal is moving at speed of " + speed);
 }
 
-moveAnimal({type: 'bird', flyingSpeed: 12})
+moveAnimal({ type: "bird", flyingSpeed: 12 });
+
+const userInput = document.getElementById("user-input") as HTMLInputElement;
+
+userInput.value = "Enter some value";
