@@ -23,12 +23,19 @@ type Numeric = number | boolean;
 
 type Universal = Combinable & Numeric;
 
+function add(n1: number, n2: number): number;
+function add(n1: string, n2: string): string;
+function add(n1: string, n2: number): string;
+function add(n1: number, n2: string): string;
 function add(n1: Combinable, n2: Combinable) {
   if (typeof n1 === "string" || typeof n2 === "string") {
     return n1.toString() + n2.toString();
   }
   return n1 + n2;
 }
+
+const result = add('2', 2);
+result.split('');
 
 type UnknownEmployee = Employee | Admin;
 
@@ -100,3 +107,12 @@ moveAnimal({ type: "bird", flyingSpeed: 12 });
 const userInput = document.getElementById("user-input") as HTMLInputElement;
 
 userInput.value = "Enter some value";
+
+interface ErrorContainer {
+  [prop: string]: string;
+}
+
+const ErrorBag: ErrorContainer = {
+  name: 'invalid name',
+  email: 'invalid email',
+}
