@@ -62,3 +62,23 @@ const textStorage = new DataStorage<string>();
 textStorage.addItem("Jack");
 textStorage.addItem("Many");
 textStorage.addItem("");
+
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoal(
+  title: string,
+  description: string,
+  completeUntil: Date
+): CourseGoal {
+  let courseGoalObj: Partial<CourseGoal> = {};
+  courseGoalObj.title = title;
+  courseGoalObj.description = description;
+  courseGoalObj.completeUntil = completeUntil;
+  return courseGoalObj as CourseGoal;
+}
+
+const namesList: Readonly<string[]> = ["Max", "Anna"];
