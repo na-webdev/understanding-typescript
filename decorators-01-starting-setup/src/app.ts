@@ -6,13 +6,19 @@ function Logger(logString: string) {
 }
 
 function WithTemplate(template: string, hookId: string) {
-  return function (constructor: any) {
-    const hookEl = document.getElementById(hookId);
-    const newPerson = new constructor();
-    if (hookEl) {
-      hookEl.innerHTML = template;
-      hookEl.querySelector("h1")!.textContent = newPerson.name;
-    }
+  return function <T extends { new (...args: any[]): { name: string } }>(
+    originalConstructor: T
+  ) {
+    return class extends originalConstructor {
+      constructor(..._: any[]) {
+        super();
+        const hookEl = document.getElementById(hookId);
+        if (hookEl) {
+          hookEl.innerHTML = template;
+          hookEl.querySelector("h1")!.textContent = this.name;
+        }
+      }
+    };
   };
 }
 
@@ -82,3 +88,31 @@ class Person {
 const pers = new Person();
 
 console.log(pers);
+
+function AutoBind(_: any, _2: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
+  const adjustedDescriptor: PropertyDescriptor = {
+    configurable: true,
+    enumerable: false,
+    get() {
+      const boundFn = originalMethod.bind(this);
+      return boundFn;
+    },
+  };
+
+  return adjustedDescriptor;
+}
+
+class Printer {
+  message = "This is important message";
+
+  @AutoBind
+  showMessage() {
+    console.log(this.message);
+  }
+}
+
+const newPrinter = new Printer();
+
+const button = document.getElementById("button")!;
+button.addEventListener("click", newPrinter.showMessage);
