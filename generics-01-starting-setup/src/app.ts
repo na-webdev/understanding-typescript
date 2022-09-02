@@ -1,6 +1,6 @@
 const names: Array<string> = [];
 
-const promise: Promise<string> = new Promise((resolve, reject) => {
+const promise: Promise<string> = new Promise((resolve) => {
   setTimeout(() => {
     resolve("This is done!");
   }, 2000);
