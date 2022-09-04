@@ -95,8 +95,7 @@ function AutoBind(_: any, _2: string, descriptor: PropertyDescriptor) {
     configurable: true,
     enumerable: false,
     get() {
-      const boundFn = originalMethod.bind(this);
-      return boundFn;
+      return originalMethod.bind(this);
     },
   };
 
