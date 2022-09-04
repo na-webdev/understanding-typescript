@@ -23,7 +23,7 @@ function WithTemplate(template: string, hookId: string) {
 }
 
 function PropertyDecorator(target: any, propertyName: string | Symbol) {
-  console.log("Property decorator");
+  console.log("Property decorators");
   console.log(target, propertyName);
 }
 
@@ -32,7 +32,7 @@ function AccessorDecorator(
   name: string,
   descriptor: PropertyDescriptor
 ) {
-  console.log("Accessor decorator");
+  console.log("Accessor decorators");
   console.log(target);
   console.log(name);
   console.log(descriptor);
@@ -43,7 +43,7 @@ function MethodDecorator(
   name: string | Symbol,
   descriptor: PropertyDescriptor
 ) {
-  console.log("Method decorator");
+  console.log("Method decorators");
   console.log(target);
   console.log(name);
   console.log(descriptor);
@@ -54,7 +54,7 @@ function ParameterDecorator(
   name: string | Symbol,
   position: number
 ) {
-  console.log("Parameter decorator");
+  console.log("Parameter decorators");
   console.log(target);
   console.log(name);
   console.log(position);
@@ -65,7 +65,7 @@ function ParameterDecorator(
 class Person {
   name = "John";
   @PropertyDecorator
-  title = "Person decorator";
+  title = "Person decorators";
 
   private _wage: number;
 
